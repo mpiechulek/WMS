@@ -22,6 +22,8 @@ export class LoginComponent {
     this.initLoginForm();
   }
 
+  // matcher = new MyErrorStateMatcher();
+
   /**
    *
    */
@@ -29,7 +31,7 @@ export class LoginComponent {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-    });
+    },{updateOn: 'blur'});
   }
 
   /**
