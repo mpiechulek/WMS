@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { LoginFormInterface } from 'src/app/shared/models/login-form.interface';
 
 @Component({
   selector: 'app-login',
@@ -7,6 +13,31 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  loginForm!: FormGroup;
+  loginActionInProgress = false;
 
+  constructor(private formBuilder: FormBuilder) {}
 
+  ngOnInit(): void {
+    this.initLoginForm();
+  }
+
+  /**
+   *
+   */
+  initLoginForm() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
+
+  /**
+   *
+   */
+  submitForm(): void {
+    if (this.loginForm.valid) {    
+      this.loginActionInProgress = true;
+    }
+  }
 }
