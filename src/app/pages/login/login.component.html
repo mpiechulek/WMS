@@ -2,21 +2,26 @@
   <!--  -->
   <div class="row justify-content-center">
     <div class="col-sm-12 col-lg-6">
-      <div class=" mt-xs-2 mt-sm-3 mt-lg-5 wms-main-header wms-main-header--margin-bottom">
+      <div
+        class="mt-xs-2 mt-sm-3 mt-lg-5 wms-main-header wms-main-header--margin-bottom"
+      >
         <h1>WMS</h1>
       </div>
 
-      <h2>Please login to your account</h2>
+      <h2>Please login to your account</h2>     
 
       <form [formGroup]="loginForm">
         <div class="d-flex justify-content-center">
-          <mat-form-field appearance="outline" [style.width.%]="100">
+          <mat-form-field
+            appearance="outline"
+            [style.width.%]="100"           
+          >
             <mat-label>Email</mat-label>
             <input
               matInput
               placeholder="emial@123.com"
-              formControlName="email"
-            />         
+              formControlName="email"              
+            />
           </mat-form-field>
         </div>
 
@@ -25,9 +30,9 @@
             <mat-label>Password</mat-label>
             <input
               matInput
-              type="password"              
-              formControlName="password"
-            />            
+              type="password"
+              formControlName="password"        
+            />
           </mat-form-field>
         </div>
 
@@ -42,15 +47,15 @@
       </form>
 
       <div class="row mt-5" *ngIf="loginActionInProgress">
-        <app-spinner/>
+        <app-spinner />
       </div>
     </div>
   </div>
   <!--  -->
-  <div class="row fixed-bottom mb-3  d-flex justify-content-center">
+  <div class="row fixed-bottom mb-3 d-flex justify-content-center">
     <div class="col-sm-12 col-lg-6">
       <div class="alert alert-danger mx-2" role="alert">
-        Błędny login lub hasło!!!
+        {{ errorMessage }}
       </div>
     </div>
   </div>

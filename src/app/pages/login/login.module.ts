@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -20,7 +21,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
 })
 export class LoginModule {}
