@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly baseUrl: string = 'https://abx.com';
+  private readonly baseUrl: string = 'https://abx.com/api/v1';
 
   constructor(private httpClient: HttpClient) {}
 

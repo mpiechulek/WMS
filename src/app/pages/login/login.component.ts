@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
-import { LoginFormInterface } from 'src/app/shared/models/login-form.interface';
 
 @Component({
   selector: 'app-login',
@@ -28,8 +27,6 @@ export class LoginComponent {
     this.initLoginForm();
   }
 
-  // matcher = new MyErrorStateMatcher();
-
   /**
    *
    */
@@ -43,30 +40,30 @@ export class LoginComponent {
   /**
    *
    */
-  submitForm(): void {
-    if (this.loginForm.valid) {
-    this.loginActionInProgress = true;
-    this.apiService
-      .loginUser(this.loginForm.value)
-      .pipe(
-        catchError((error: HttpErrorResponse) => {
-          this.loginActionInProgress = false;
-          this.errorMessage = error.message;
-          this.showErrorMessage();
-          throw error;
-        })
-      )
-      .subscribe((res: { token: string }) => {
-        window.sessionStorage.setItem('token', JSON.stringify(res.token));
-        this.router.navigate(['/main-page']);
-      });
+  submitLoginForm(): void {
+    if (this.loginForm.valid) {        
+      this.loginActionInProgress = true;
+      this.apiService
+        .loginUser(this.loginForm.value)
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            this.loginActionInProgress = false;
+            this.errorMessage = error.message;
+            this.showErrorMessage();
+            throw error;
+          })
+        )
+        .subscribe((res: { token: string }) => {          
+          window.sessionStorage.setItem('token', JSON.stringify(res.token));
+          this.router.navigate(['main-page']);
+        });
     }
   }
 
   /**
    *
    */
-  showErrorMessage() {
+  showErrorMessage(): void {
     this.showErrorMessageFlag = true;
     setTimeout(() => {
       this.showErrorMessageFlag = false;
