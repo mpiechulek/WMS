@@ -1,0 +1,21 @@
+.example-viewport {
+    height: 33rem;
+    width: 100%;  
+    margin-top: 2rem; 
+    margin-bottom: 2rem; 
+  }
+  
+  .example-item {
+    height: 50px; 
+    cursor: pointer !important; 
+
+    h4 {      
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+    
+    &:hover {
+        background-color: rgb(223, 223, 223);
+    }
+  }

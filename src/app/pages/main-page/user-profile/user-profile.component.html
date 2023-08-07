@@ -1,0 +1,61 @@
+<form class="container">
+  <div class="row">
+    <div
+      class="mb-xs-5 col-sm-12 col-lg-6 p-0 d-flex justify-content-center align-items-center"
+    >
+      <div
+        class="image-holder d-flex justify-content-center align-items-center"
+      >
+        <mat-icon>add_photo_alternate</mat-icon>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-lg-6 d-flex flex-column p-0 mt-sm-5 mt-xs-5">
+      <mat-form-field class="example-full-width">
+        <mat-label>Imię</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Stanowisko</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Uprawnienia</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row my-5">
+    <div class="p-0 col-sm-12 col-lg-6 d-flex">
+      <button
+        class="button-margin-right"
+        mat-raised-button
+        color="primary"
+        type="button"
+      >
+        Zapisz
+      </button>
+      <button mat-raised-button color="warn" type="button">Usuń</button>
+    </div>
+  </div>
+</form>
+
+<div class="alert alert-success mt-5 mb-5" role="alert">
+  {{ "Udało się utworzyć nowy rekord&" }}
+</div>
+
+<div class="alert alert-danger mt-5 mb-5" role="alert">
+  {{ "Próba utworzenia się nie powiodła" }}
+</div>
