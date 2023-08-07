@@ -54,7 +54,7 @@ export class LoginComponent {
           })
         )
         .subscribe((res: { token: string }) => {          
-          window.sessionStorage.setItem('token', JSON.stringify(res.token));
+          sessionStorage.setItem('token', JSON.stringify(res.token));
           this.router.navigate(['main-page']);
         });
     }

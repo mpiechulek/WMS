@@ -1,14 +1,20 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const token = window.sessionStorage.getItem('token');
-  //here we would need to decode the token and compare the expiration date
-  if (token) {
-    return true;
-  } else {
-    router.navigate(['login']);
-    return false;
+@Injectable()
+export class AuthGuard implements CanActivate {
+
+  constructor(private router: Router) {}
+
+  canActivate(): boolean {
+    const token = sessionStorage.getItem('token');
+
+    // Here we would need to decode the token and compare the expiration date
+    if (token) {
+      return true;
+    } else {
+      this.router.navigate(['login']);
+      return false;
+    }
   }
-};
+}

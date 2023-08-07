@@ -9,7 +9,10 @@ import { LoginComponent } from './login.component';
 import { FormBuilder } from '@angular/forms';
 import { LoginModule } from './login.module';
 import { ApiService } from 'src/app/services/api.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { Observable, of, pipe, throwError } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
@@ -22,6 +25,7 @@ describe('LoginComponent', () => {
   let formBuilder: FormBuilder;
   let apiService: ApiService;
   let router: Router;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,16 +42,14 @@ describe('LoginComponent', () => {
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-
     formBuilder = TestBed.inject(FormBuilder);
 
     component.loginForm = formBuilder.group({
       email: ['johndoe@example.com'],
       password: ['1234'],
     });
-
+    httpMock = TestBed.inject(HttpTestingController);
     apiService = TestBed.inject(ApiService);
-
     fixture.detectChanges();
   });
 
@@ -79,21 +81,31 @@ describe('LoginComponent', () => {
     expect(component.submitLoginForm).toHaveBeenCalled();
   }));
 
-  it('should return an error when calling ', fakeAsync(() => {
-    // spyOn(component, 'submitLoginForm').and.callThrough();
-    // spyOn(apiService, 'loginUser').and.returnValue(
-    //   throwError(new HttpErrorResponse({ error: 'error' }))
-    // );
-    // //Set some values to make form valid
-    // component.loginForm.patchValue({
-    //   email: 'johndoe@example.com',
-    //   password: '1234',
-    // });
-    // // call the method in the component
-    // component.submitLoginForm();
-    // tick();
-    // expect(apiService.loginUser).toHaveBeenCalled(); 
-  }));
+  // it('should return an error when calling ', (done) => {
+  //   const errorResponse = new HttpErrorResponse({
+  //     error: { message: 'Error message' },
+  //     status: 500,
+  //     statusText: 'Internal Server Error',
+  //   });
+  //   const postData = { email: 'abc@123.com', password: '1234' };
+  //   spyOn(component, 'submitLoginForm').and.callThrough();
+  //   spyOn(apiService, 'loginUser').and.returnValue(
+  //     throwError(() => errorResponse)
+  //   );
+
+  //   component.loginForm.patchValue({
+  //     email: postData.email,
+  //     password: postData.password,
+  //   });
+
+  //   component.submitLoginForm();
+  //   // const req = httpMock.expectOne('https://abx.com/api/v1/login');
+  //   // expect(req.request.method).toBe('POST');
+  //   // req.flush(null, errorResponse);
+    
+  //   expect(component.errorMessage).toEqual('Http failure response for (unknown url): 500 Internal Server Error');
+  //   done();
+  // });
 
   it('should change the showErrorMessageFlag to true and after 3s to false', fakeAsync(() => {
     expect(component.showErrorMessageFlag).toEqual(false);
