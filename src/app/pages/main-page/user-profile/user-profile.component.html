@@ -50,12 +50,16 @@
       <button mat-raised-button color="warn" type="button">Usuń</button>
     </div>
   </div>
+  <div
+    class="col-sm-12 col-lg-12 p-0 d-flex flex-column justify-content-end h-100"
+  >
+    <div class="alert alert-success mt-3 mb-3" role="alert">
+      {{ "Udało się utworzyć nowy rekord&" }}
+    </div>
+  
+    <div class="alert alert-danger mt-3 mb-3" role="alert">
+      {{ "Próba utworzenia się nie powiodła" }}
+    </div>
+  </div>
 </form>
 
-<div class="alert alert-success mt-5 mb-5" role="alert">
-  {{ "Udało się utworzyć nowy rekord&" }}
-</div>
-
-<div class="alert alert-danger mt-5 mb-5" role="alert">
-  {{ "Próba utworzenia się nie powiodła" }}
-</div>
