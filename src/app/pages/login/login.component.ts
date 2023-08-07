@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
@@ -13,14 +13,14 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  loginActionInProgress = false;
-  showErrorMessageFlag = false;
+  loginAction = { inProgress: false, showError: false };
   errorMessage = 'An error has ocurred';
 
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -41,19 +41,20 @@ export class LoginComponent {
    *
    */
   submitLoginForm(): void {
-    if (this.loginForm.valid) {        
-      this.loginActionInProgress = true;
+    if (this.loginForm.valid) {
+      this.loginAction = { ...this.loginAction, inProgress: true };
       this.apiService
         .loginUser(this.loginForm.value)
         .pipe(
           catchError((error: HttpErrorResponse) => {
-            this.loginActionInProgress = false;
+            this.loginAction = { showError: true, inProgress: false };
             this.errorMessage = error.message;
             this.showErrorMessage();
+            this.cd.detectChanges();
             throw error;
           })
         )
-        .subscribe((res: { token: string }) => {          
+        .subscribe((res: { token: string }) => {
           sessionStorage.setItem('token', JSON.stringify(res.token));
           this.router.navigate(['main-page']);
         });
@@ -63,10 +64,10 @@ export class LoginComponent {
   /**
    *
    */
-  showErrorMessage(): void {
-    this.showErrorMessageFlag = true;
+  showErrorMessage(): void {   
     setTimeout(() => {
-      this.showErrorMessageFlag = false;
-    }, 3000);
+      this.loginAction = { ...this.loginAction, showError: false };
+      this.cd.detectChanges();
+    }, 5000);
   }
 }

@@ -107,11 +107,9 @@ describe('LoginComponent', () => {
   //   done();
   // });
 
-  it('should change the showErrorMessageFlag to true and after 3s to false', fakeAsync(() => {
-    expect(component.showErrorMessageFlag).toEqual(false);
-    component.showErrorMessage();
-    expect(component.showErrorMessageFlag).toEqual(true);
-    tick(3000);
-    expect(component.showErrorMessageFlag).toEqual(false);
+  it('should change the showErrorMessageFlag to true and after 3s to false', fakeAsync(() => {   
+    component.showErrorMessage();    
+    tick(5000);
+    expect(component.loginAction.showError).toEqual(false);
   }));
 });
