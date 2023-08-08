@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Czy napewno chcesz {{ data.name }} użytkownika?</h1>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onConfirm()">Tak</button>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="onCancel()">
+    Nie
+  </button>
+</div>

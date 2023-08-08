@@ -1,16 +1,33 @@
 <mat-list>
   <h3>Lista użytkowników</h3>
   <mat-divider></mat-divider>
-  <cdk-virtual-scroll-viewport itemSize="80" class="example-viewport">
-    <mat-list-item *cdkVirtualFor="let folder of folders" class="example-item">
-      <div class="d-flex align-items-center">
+  <cdk-virtual-scroll-viewport
+    itemSize="80"
+    class="example-viewport"    
+  >
+    <mat-list-item
+      *cdkVirtualFor="let user of users"
+      class="example-item"
+      [attr.data-user-id]="user.id"
+			(click)="onPatchUserData(user.id)"
+    >
+		
+      <div class="d-flex align-items-center" >
         <mat-icon>info</mat-icon>
-        <h4>{{ folder.name }}</h4>
+        <h4>{{ user.name }} {{ user.surname }}</h4>
       </div>
     </mat-list-item>
   </cdk-virtual-scroll-viewport>
 </mat-list>
 <mat-divider></mat-divider>
-<button mat-raised-button color="primary" type="button" class="mt-5 mb-5">
+
+<button
+  mat-raised-button
+  color="primary"
+  type="button"
+  class="mt-5 mb-5"
+  (click)="onAddNewUser()"
+  [disabled]="showUserProfileForm"
+>
   Dodaj użytkownika
 </button>

@@ -20,6 +20,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { ListComponent } from './list/list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ToolBarComponent,
     ListComponent,
     UserProfileComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     SharedModule,
     MatSelectModule,
     MatCardModule,
+    MatIconModule,
+    MatDialogModule
   ],
 })
 export class MainPageModule {}

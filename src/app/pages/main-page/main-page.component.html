@@ -1,11 +1,28 @@
-<app-tool-bar/>
+<app-tool-bar />
 <div class="container">
   <div class="row mt-5">
     <div class="col-sm-12 col-lg-4">
-      <app-list></app-list>      
+      <app-list
+        (addUser)="addNewUser()"
+        (patchUserData)="patchUser($event)"
+        [showUserProfileForm]="showUserProfileForm"
+        [users]="users"
+      ></app-list>
     </div>
     <div class="col-sm-12 col-lg-8">
-      <app-user-profile></app-user-profile>     
+      <app-user-profile
+        *ngIf="showUserProfileForm"
+        (userAction)="openDialog($event)"
+        [userForm]="getUserForm"
+      ></app-user-profile>
+
+      <div class="alert alert-success mt-3 mb-3" role="alert">
+        {{ "Udało się utworzyć nowy rekord&" }}
+      </div>
+
+      <div class="alert alert-danger mt-3 mb-3" role="alert">
+        {{ "Próba utworzenia się nie powiodła" }}
+      </div>
     </div>
   </div>
 </div>

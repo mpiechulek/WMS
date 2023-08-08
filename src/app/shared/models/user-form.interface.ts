@@ -1,6 +1,6 @@
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl } from '@angular/forms';
 
-export interface LoginFormInterface extends FormGroup {
+export interface UserFormInterface {
   id: FormControl<string>;
   name: FormControl<string>;
   surname: FormControl<string>;

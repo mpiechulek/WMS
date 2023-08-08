@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { UserInterface } from 'src/app/shared/models/user.interface';
 
 @Component({
   selector: 'app-list',
@@ -7,45 +14,28 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent {
+  @Input() showUserProfileForm = false;
+  @Output() addUser: EventEmitter<undefined> = new EventEmitter<undefined>();
+  @Output() patchUserData: EventEmitter<string> = new EventEmitter<string>();
 
-  items = Array.from({length: 100000}).map((_, i) => `Item #${i}`);
+  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
 
-  folders = [
-    {
-      name: 'Jan Kowalksi',
-    },
-    {
-      name: 'Ronald Trąbka',
-    },
-    {
-      name: 'Mariusz wszytskowidzi',
-    },
-    {
-      name: 'Marcin Woźniak',
-    },
-    {
-      name: 'Abrams Richardson',
-    },
-    {
-      name: 'Maciej Je',
-    },
-    {
-      name: 'Jan Kowalksi',
-    },
-    {
-      name: 'Ronald Trąbka',
-    },
-    {
-      name: 'Mariusz wszytskowidzi',
-    },
-    {
-      name: 'Marcin Woźniak',
-    },
-    {
-      name: 'Abrams Richardson',
-    },
-    {
-      name: 'Maciej Je',
-    },
-  ];
+  @Input() users: UserInterface[] = [];
+
+  /**
+   *
+   * @param userId
+   */
+  onPatchUserData(userId: string): void {
+    if (userId) {
+      this.patchUserData.emit(userId);
+    }
+  }
+
+  /**
+   *
+   */
+  onAddNewUser(): void {
+    this.addUser.emit();
+  }
 }
